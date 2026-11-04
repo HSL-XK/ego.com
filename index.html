@@ -21,14 +21,22 @@
 <style>
   html[data-theme="dark"]{
     --bg:#08090c; --fg:#e6edf3; --muted:#8b949e;
-    --line:rgba(255,255,255,.09); --card:rgba(255,255,255,.028); --card-hi:rgba(255,255,255,.055);
-    --accent:#22d3ee; --glow:34,211,238; --glow-a:.13;
+    --line:rgba(255,255,255,.09);
+    --glass:rgba(255,255,255,.055); --glass-hi:rgba(255,255,255,.09);
+    --glass-bd:rgba(255,255,255,.14); --glass-hl:rgba(255,255,255,.11);
+    --glass-sh:rgba(0,0,0,.36);
+    --accent:#22d3ee; --glow:34,211,238; --glow-a:.16;
+    --glow2:129,140,248; --glow2-a:.13;
     --shadow:0 1px 2px rgba(0,0,0,.5);
   }
   html[data-theme="light"]{
     --bg:#fbfcfd; --fg:#0d1117; --muted:#57606a;
-    --line:rgba(0,0,0,.095); --card:rgba(255,255,255,.72); --card-hi:#ffffff;
-    --accent:#0891b2; --glow:8,145,178; --glow-a:.08;
+    --line:rgba(0,0,0,.095);
+    --glass:rgba(255,255,255,.55); --glass-hi:rgba(255,255,255,.82);
+    --glass-bd:rgba(255,255,255,.9); --glass-hl:rgba(255,255,255,.98);
+    --glass-sh:rgba(16,24,40,.09);
+    --accent:#0891b2; --glow:8,145,178; --glow-a:.14;
+    --glow2:99,102,241; --glow2-a:.11;
     --shadow:0 1px 2px rgba(16,24,40,.06);
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -41,7 +49,11 @@
   }
   body::before{
     content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
-    background:radial-gradient(680px circle at 50% -12%, rgba(var(--glow),var(--glow-a)), transparent 70%);
+    background:
+      radial-gradient(560px circle at 10% 4%, rgba(var(--glow),var(--glow-a)), transparent 62%),
+      radial-gradient(680px circle at 90% 12%, rgba(var(--glow2),var(--glow2-a)), transparent 64%),
+      radial-gradient(520px circle at 20% 52%, rgba(var(--glow2),var(--glow2-a)), transparent 66%),
+      radial-gradient(600px circle at 78% 88%, rgba(var(--glow),var(--glow-a)), transparent 66%);
   }
   #glow{position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none}
   .scan{
@@ -57,9 +69,11 @@
   .theme-toggle{
     position:fixed; top:20px; right:20px; z-index:9;
     width:42px; height:42px; border-radius:50%; display:grid; place-items:center;
-    border:1px solid var(--line); background:var(--card); backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px); color:var(--muted); cursor:pointer; box-shadow:var(--shadow);
-    transition:transform .2s ease,border-color .2s ease,color .2s ease;
+    border:1px solid var(--glass-bd); background:var(--glass);
+    backdrop-filter:blur(20px) saturate(170%); -webkit-backdrop-filter:blur(20px) saturate(170%);
+    color:var(--muted); cursor:pointer;
+    box-shadow:0 6px 20px var(--glass-sh), inset 0 1px 0 var(--glass-hl);
+    transition:transform .2s ease,border-color .2s ease,color .2s ease,background-color .2s ease;
   }
   .theme-toggle:hover{transform:scale(1.07); border-color:var(--accent); color:var(--accent)}
   .theme-toggle:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
@@ -70,8 +84,10 @@
   .badge{
     display:inline-flex; align-items:center; gap:8px; margin-bottom:22px;
     font-size:12.5px; color:var(--muted); letter-spacing:.02em;
-    border:1px solid var(--line); border-radius:999px; padding:5px 13px;
-    background:var(--card); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    border:1px solid var(--glass-bd); border-radius:999px; padding:5px 13px;
+    background:var(--glass);
+    backdrop-filter:blur(18px) saturate(160%); -webkit-backdrop-filter:blur(18px) saturate(160%);
+    box-shadow:inset 0 1px 0 var(--glass-hl);
   }
   .dot{width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulse 2.4s ease-out infinite}
   @keyframes pulse{
@@ -84,9 +100,11 @@
   .links{margin-top:30px; display:flex; flex-wrap:wrap; gap:10px}
   .links a{
     font-size:14px; text-decoration:none; color:var(--fg);
-    border:1px solid var(--line); border-radius:10px; padding:8px 15px;
-    background:var(--card); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-    transition:border-color .2s,color .2s,transform .2s;
+    border:1px solid var(--glass-bd); border-radius:11px; padding:8px 15px;
+    background:var(--glass);
+    backdrop-filter:blur(18px) saturate(160%); -webkit-backdrop-filter:blur(18px) saturate(160%);
+    box-shadow:inset 0 1px 0 var(--glass-hl);
+    transition:border-color .2s,color .2s,transform .2s,background-color .2s;
   }
   .links a:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-1px)}
   section{margin-top:74px}
@@ -94,17 +112,21 @@
   .grid{margin-top:22px; display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
   .card{
     position:relative; overflow:hidden; display:block; text-decoration:none; color:inherit;
-    border:1px solid var(--line); border-radius:14px; padding:20px;
-    background:var(--card); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-    box-shadow:var(--shadow);
-    transition:transform .28s cubic-bezier(.2,.7,.3,1),border-color .25s,background-color .25s;
+    border:1px solid var(--glass-bd); border-radius:16px; padding:22px;
+    background:var(--glass);
+    backdrop-filter:blur(24px) saturate(180%); -webkit-backdrop-filter:blur(24px) saturate(180%);
+    box-shadow:0 10px 34px var(--glass-sh), inset 0 1px 0 var(--glass-hl);
+    transition:transform .28s cubic-bezier(.2,.7,.3,1),border-color .25s,background-color .25s,box-shadow .28s;
   }
   .card::after{
     content:''; position:absolute; inset:0; border-radius:14px; pointer-events:none; opacity:0;
     background:radial-gradient(220px circle at var(--mx,50%) var(--my,0%),rgba(var(--glow),.14),transparent 62%);
     transition:opacity .3s;
   }
-  .card:hover{transform:translateY(-3px); border-color:var(--accent); background:var(--card-hi)}
+  .card:hover{
+    transform:translateY(-3px); border-color:var(--accent); background:var(--glass-hi);
+    box-shadow:0 18px 46px var(--glass-sh), inset 0 1px 0 var(--glass-hl);
+  }
   .card:hover::after{opacity:1}
   .card h3{font-size:16px; font-weight:600; margin-bottom:7px}
   .card p{font-size:14px; color:var(--muted); line-height:1.65}
