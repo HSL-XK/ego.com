@@ -20,24 +20,24 @@
 </script>
 <style>
   html[data-theme="dark"]{
-    --bg:#08090c; --fg:#e6edf3; --muted:#8b949e;
+    --bg:#0a0908; --fg:#ece8e4; --muted:#9c928a;
     --line:rgba(255,255,255,.09);
     --glass:rgba(255,255,255,.055); --glass-hi:rgba(255,255,255,.09);
     --glass-bd:rgba(255,255,255,.14); --glass-hl:rgba(255,255,255,.11);
-    --glass-sh:rgba(0,0,0,.36);
-    --accent:#22d3ee; --glow:34,211,238; --glow-a:.16;
-    --glow2:129,140,248; --glow2-a:.13;
+    --glass-sh:rgba(0,0,0,.38);
+    --accent:#ff5a72; --glow:255,90,114; --glow-a:.15;
+    --glow2:250,204,21; --glow2-a:.10;
     --shadow:0 1px 2px rgba(0,0,0,.5);
   }
   html[data-theme="light"]{
-    --bg:#fbfcfd; --fg:#0d1117; --muted:#57606a;
+    --bg:#fdfcfa; --fg:#1a1614; --muted:#6b625c;
     --line:rgba(0,0,0,.095);
-    --glass:rgba(255,255,255,.55); --glass-hi:rgba(255,255,255,.82);
-    --glass-bd:rgba(255,255,255,.9); --glass-hl:rgba(255,255,255,.98);
-    --glass-sh:rgba(16,24,40,.09);
-    --accent:#0891b2; --glow:8,145,178; --glow-a:.14;
-    --glow2:99,102,241; --glow2-a:.11;
-    --shadow:0 1px 2px rgba(16,24,40,.06);
+    --glass:rgba(255,255,255,.58); --glass-hi:rgba(255,255,255,.85);
+    --glass-bd:rgba(255,255,255,.92); --glass-hl:rgba(255,255,255,.98);
+    --glass-sh:rgba(60,32,16,.10);
+    --accent:#cf1f3d; --glow:207,31,61; --glow-a:.13;
+    --glow2:245,158,11; --glow2-a:.12;
+    --shadow:0 1px 2px rgba(60,32,16,.07);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -58,7 +58,7 @@
   #glow{position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none}
   .scan{
     position:fixed; left:0; top:0; width:100%; height:1px; z-index:3; pointer-events:none;
-    background:linear-gradient(90deg,transparent,rgba(var(--glow),.85),transparent);
+    background:linear-gradient(90deg,transparent 0%,rgba(var(--glow),.75) 30%,rgba(var(--glow2),.68) 64%,transparent 100%);
     animation:scanMove 7s linear infinite;
   }
   @keyframes scanMove{
@@ -221,7 +221,7 @@
   document.getElementById('year').textContent = new Date().getFullYear();
 
   function glowColor(){
-    return getComputedStyle(root).getPropertyValue('--glow').trim() || '34,211,238';
+    return getComputedStyle(root).getPropertyValue('--glow').trim() || '255,90,114';
   }
 
   btn.addEventListener('click', function(){
@@ -263,7 +263,7 @@
       if(cx > -400){
         var r = Math.max(260, Math.min(w, h) * 0.42);
         var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
-        g.addColorStop(0, 'rgba(' + col + ',0.15)');
+        g.addColorStop(0, 'rgba(' + col + ',0.12)');
         g.addColorStop(1, 'rgba(' + col + ',0)');
         ctx.fillStyle = g;
         ctx.fillRect(0, 0, w, h);
