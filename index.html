@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>你的名字</title>
+<meta name="description" content="一句话说清你是谁、在做什么。">
+<meta property="og:title" content="你的名字">
+<meta property="og:description" content="一句话说清你是谁、在做什么。">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:,">
+<style>
+  :root{
+    color-scheme: light dark;
+    --bg:#ffffff; --fg:#1a1a1a; --muted:#6b7280;
+    --line:#e5e7eb; --accent:#0e9f6e;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#0f1115; --fg:#e6e8eb; --muted:#9aa4b2; --line:#23272e; --accent:#34d399; }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--fg);
+    font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    -webkit-font-smoothing:antialiased;
+    -webkit-text-size-adjust:100%;
+  }
+  main{max-width:720px;margin:0 auto;padding:76px 24px 48px}
+  h1{font-size:30px;font-weight:600;letter-spacing:-.02em;line-height:1.3}
+  .lede{margin-top:14px;font-size:17px;color:var(--muted);line-height:1.7}
+  .links{margin-top:26px;display:flex;flex-wrap:wrap;gap:20px}
+  .links a{color:var(--accent);text-decoration:none;font-size:15px;border-bottom:1px solid transparent;transition:border-color .15s}
+  .links a:hover{border-bottom-color:currentColor}
+  section{margin-top:60px}
+  h2{font-size:12.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+  .list{list-style:none;margin-top:22px;display:grid;gap:22px}
+  .list li{border-top:1px solid var(--line);padding-top:20px}
+  .item-t{font-size:17px;font-weight:600;color:var(--fg);text-decoration:none;transition:color .15s}
+  .item-t:hover{color:var(--accent)}
+  .item-d{margin-top:7px;color:var(--muted);font-size:15px}
+  .item-m{margin-top:9px;font-size:13px;color:var(--muted);opacity:.85;letter-spacing:.01em}
+  .about p{margin-top:16px;color:var(--muted);font-size:15.5px}
+  footer{margin-top:68px;padding-top:26px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+  footer a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line)}
+  footer a:hover{border-bottom-color:var(--muted)}
+  @media (max-width:520px){
+    main{padding:52px 20px 40px}
+    h1{font-size:26px}
+    .lede{font-size:16px}
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <header>
+    <h1>你的名字</h1>
+    <p class="lede">一句话说清你是谁、在做什么。比如：全栈开发者，用 Java 和 Vue 做一些自己会用的小工具。</p>
+    <nav class="links">
+      <a href="https://github.com/你的用户名" target="_blank" rel="noopener">GitHub</a>
+      <a href="#" target="_blank" rel="noopener">博客</a>
+      <a href="mailto:you@example.com">Email</a>
+    </nav>
+  </header>
+
+  <section>
+    <h2>项目</h2>
+    <ul class="list">
+      <li>
+        <a class="item-t" href="#" target="_blank" rel="noopener">项目名一</a>
+        <p class="item-d">一句话说明这个项目解决了什么问题。不用写功能列表，写清楚「为什么做」比「做了什么」更抓人。</p>
+        <p class="item-m">Spring Boot · Vue 3 · MySQL</p>
+      </li>
+      <li>
+        <a class="item-t" href="#" target="_blank" rel="noopener">项目名二</a>
+        <p class="item-d">同上。如果一个项目还在做，直接标明「进行中」比装作已完成更可信。</p>
+        <p class="item-m">进行中 · 2026</p>
+      </li>
+      <li>
+        <a class="item-t" href="#" target="_blank" rel="noopener">项目名三</a>
+        <p class="item-d">第三个占位。不需要凑数——只放真正拿得出手的两三个就够了。</p>
+        <p class="item-m">Python · 数据处理</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="about">
+    <h2>关于</h2>
+    <p>两三段话说清你的方向和在做的事。这一段是访客唯一会认真读的地方。</p>
+    <p>可以写：现在在学什么、之前做过什么、对什么感兴趣。别写「热爱编程、善于沟通」这类形容词，写具体的事。</p>
+  </section>
+
+  <footer>
+    <span>© <span id="year">2026</span> 你的名字</span>
+    <span>Hosted on <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a></span>
+  </footer>
+
+</main>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
